@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>List of restaurants in Helsinki</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+	<h1>Restaurants in Helsinki</h1>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Address</th>
+			<th>Phone</th>
+		</tr>
+			<tr th:each = "restaurant : ${restaurants}">
+				<td th:text = "${restaurant.name}"></td>
+				<td th:text = "${restaurant.address}"></td>
+				<td th:text = "${restaurant.phone}"></td>
+				<td><a th:href="@{/delete/{id}(id=${restaurant.id})}">Delete</a></td>
+			</tr>
+	</table>
+	<a href="/add">Add restaurants</a>
+</body>
+</html>
