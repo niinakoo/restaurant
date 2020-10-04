@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,13 @@ public class RestaurantController {
 	@Autowired
 	private CuisineRepository crepository;
 	
+	
+	//Kirjautumissivu
+	@RequestMapping(value="/login")
+	public String login() {
+		return "login";
+	} 
+	
 	//Näyttää kaikki ravintolat
 	@RequestMapping("/restaurantlist")
 	public String restaurantList(Model model) {
@@ -33,6 +41,7 @@ public class RestaurantController {
 	
 	//Lisää ravintola
 	@RequestMapping(value = "/add")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String addRestaurant(Model model) {
 		model.addAttribute("restaurant", new Restaurant());
 		model.addAttribute("cuisines", crepository.findAll());
@@ -48,6 +57,7 @@ public class RestaurantController {
 	
 	//Poistaa ravintolan
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String deleteRestaurant(@PathVariable("id") Long restaurantId, Model model) {
 		repository.deleteById(restaurantId);
 		return "redirect:../restaurantlist";
@@ -55,6 +65,7 @@ public class RestaurantController {
 	
 	//Muokkaa ravintolan tietoja
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String editRestaurant(@PathVariable("id") Long restaurantId, Model model) {
 		model.addAttribute("restaurant", repository.findById(restaurantId));
 		model.addAttribute("cuisines", crepository.findAll());

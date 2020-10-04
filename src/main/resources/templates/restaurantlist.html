@@ -1,10 +1,11 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <title>Lista Helsingin ravintoloista</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
+	<h4 th:inline="text">Hei [[${#httpServletRequest.remoteUser}]]!</h4>
 	<h1>Ravintolat Helsingissä</h1>
 	<table>
 		<tr>
@@ -12,16 +13,21 @@
 			<th>Osoite</th>
 			<th>Puhelinnumero</th>
 			<th>Keittiö</th>
+			<th sec:authorize="hasAuthority('ADMIN')"></th>
 		</tr>
 			<tr th:each = "restaurant : ${restaurants}">
 				<td th:text = "${restaurant.name}"></td>
 				<td th:text = "${restaurant.address}"></td>
 				<td th:text = "${restaurant.phone}"></td>
 				<td th:text = "${restaurant.cuisine.name}"></td>
-				<td><a th:href="@{/edit/{id}(id=${restaurant.id})}">Muokkaa</a></td>
-				<td><a th:href="@{/delete/{id}(id=${restaurant.id})}">Poista</a></td>
+				<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/edit/{id}(id=${restaurant.id})}">Muokkaa</a></td>
+				<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${restaurant.id})}">Poista</a></td>
 			</tr>
 	</table>
-	<a href="/add">Lisää uusi ravintola</a>
+	<a sec:authorize="hasAuthority('ADMIN')" href="/add">Lisää uusi ravintola</a>
+	
+	<form th:action="@{/logout}" method="post">
+		<input type="submit" value="Kirjaudu ulos"/>
+	</form>
 </body>
 </html>
