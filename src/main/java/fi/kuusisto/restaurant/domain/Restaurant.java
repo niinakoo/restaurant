@@ -4,6 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Restaurant {
@@ -12,6 +16,11 @@ public class Restaurant {
 	@GeneratedValue(strategy=GenerationType.AUTO) 		// Tietokanta luo automaattisesti id:n
 	private long id;
 	private String name, address, phone;
+	
+	@ManyToOne
+	@JsonIgnore
+	@JoinColumn(name = "cuisineid")
+	private Cuisine cuisine;
 	
 	
 	public Restaurant() {
@@ -23,6 +32,14 @@ public class Restaurant {
 		this.name = name;
 		this.address = address;
 		this.phone = phone;
+	}
+
+	public Restaurant(String name, String address, String phone, Cuisine cuisine) {
+		super();
+		this.name = name;
+		this.address = address;
+		this.phone = phone;
+		this.cuisine = cuisine;
 	}
 
 	public long getId() {
@@ -62,6 +79,20 @@ public class Restaurant {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public Cuisine getCuisine() {
+		return cuisine;
+	}
+
+	public void setCuisine(Cuisine cuisine) {
+		this.cuisine = cuisine;
+	}
+
+	@Override
+	public String toString() {
+		return "Restaurant [id=" + id + ", name=" + name + ", address=" + address + ", phone=" + phone + ", cuisine="
+				+ cuisine + "]";
 	}
 
 }

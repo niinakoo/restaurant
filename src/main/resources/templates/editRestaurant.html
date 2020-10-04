@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Muokkaus</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Ravintolan tietojen muokkaus</h1>
+	<div>
+		<form th:object="${restaurant}" th:action="@{../save}" action="#" method="post">
+			<input type="hidden" th:field="*{id}" class="form-control"/>
+			<label for="name">Nimi</label>
+			<input type="text" th:field="*{name}"/>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="address">Osoite</label>
+			<input type="text" th:field="*{address}"/>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="phone">Puhelinnumero</label>
+			<input type="text" th:field="*{phone}"/>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="cuisineList">Keittiö</label>
+			<select id="cuisineList" th:field="*{cuisine}" class="form-control">
+				<option th:each="cuisine: ${cuisines}" th:value="${cuisine.cuisineid}" th:text="${cuisine.name}">
+				</option>
+			</select>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="submit" class="btn btn-success" value="Tallenna"></input>
+		</form>
+	</div>
+</body>
+</html>
