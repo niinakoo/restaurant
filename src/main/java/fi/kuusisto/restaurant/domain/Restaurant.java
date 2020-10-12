@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Restaurant {
 	
 	@Id													// Uniikki id
-	@GeneratedValue(strategy=GenerationType.AUTO) 		// Tietokanta luo automaattisesti id:n
+	@GeneratedValue(strategy=GenerationType.AUTO)		// Tietokanta luo automaattisesti id:n
 	private long id;
 	private String name, address, phone;
 	

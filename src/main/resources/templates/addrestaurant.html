@@ -5,15 +5,17 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>Lisää ravintola</h1>
+	<h1>Lisää ravintolan tiedot</h1>
 	<div>
 		<form th:object="${restaurant}" th:action="@{save}" action="#" method="post">
 		  	<label for="name">Nimi</label>
 			<input type="text" id="name" th:field="*{name}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
+			
 		  	<label for="address">Osoite</label>
 			<input type="text" id="address" th:field="*{address}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
+			
 		  	<label for="phone">Puhelinnumero</label>
 			<input type="text" th:field="*{phone}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
@@ -23,7 +25,8 @@
 				<option th:each = "cuisine: ${cuisines}" th:value="${cuisine.cuisineid}" th:text = "${cuisine.name}"></option>
 			</select>
 			<div style="clear: both; display: block; height: 10px;"></div>
-			<input type="submit" value="Tallenna"></input>
+			
+			<input type="submit" class="btn btn-success" value="Tallenna"></input>
 		</form>
 	</div>
 </body>
