@@ -3,8 +3,13 @@
     <head>
         <title>Kirjautuminen</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     </head>
     <body>
+		<div class="container">
         <div th:if="${param.error}">
             Väärä käyttäjätunnus tai salasana.
         </div>
@@ -15,8 +20,10 @@
         <form th:action="@{/login}" method="post">
             <div><label> Käyttäjätunnus: <input type="text" name="username"/> </label></div>
             <div><label> Salasana: <input type="password" name="password"/> </label></div>
-            <div style="clear: both; display: block; height: 10px;"></div>
-            <div><input type="submit" class="btn btn-success" value="Kirjaudu sisään"/></div>
+			<div style="clear: both; display: block; height: 20px;"></div>
+
+            <input type="submit" class="btn btn-info" value="Kirjaudu sisään"/>
         </form>
+		</div>
     </body>
 </html>

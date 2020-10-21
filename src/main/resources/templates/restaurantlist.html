@@ -3,11 +3,16 @@
 <head>
     <title>Lista Helsingin ravintoloista</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
+	<div class="container">
 	<h4 th:inline="text">Hei [[${#httpServletRequest.remoteUser}]]!</h4>
 	<h1>Ravintolat Helsingissä</h1>
-	<table>
+	 <table class="table table-striped">
 		<tr>
 			<th>Nimi</th>
 			<th>Osoite</th>
@@ -20,15 +25,17 @@
 				<td th:text = "${restaurant.address}"></td>
 				<td th:text = "${restaurant.phone}"></td>
 				<td th:text = "${restaurant.cuisine.name}"></td>
-				<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/edit/{id}(id=${restaurant.id})}">Muokkaa</a></td>
-				<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${restaurant.id})}">Poista</a></td>
+				<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/edit/{id}(id=${restaurant.id})}" class="btn btn-primary">Muokkaa</a></td>
+				<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${restaurant.id})}" class="btn btn-danger">Poista</a></td>
 			</tr>
 	</table>
-	<a sec:authorize="hasAuthority('ADMIN')" href="/add">Lisää uusi ravintola</a>
+	<a sec:authorize="hasAuthority('ADMIN')" href="/add" class="btn btn-default">Lisää uusi ravintola</a>
 	
 	<form th:action="@{/logout}" method="post">
-		<div style="clear: both; display: block; height: 10px;"></div>
-		<input type="submit" class="btn btn-success" value="Kirjaudu ulos"/>
+		<div style="clear: both; display: block; height: 20px;"></div>
+		
+		<input type="submit" class="btn btn-info" value="Kirjaudu ulos"/>
 	</form>
+	</div>
 </body>
 </html>

@@ -3,30 +3,34 @@
 <head>
     <title>Lista Helsingin ravintoloista</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
+	<div class="container">
 	<h1>Lisää ravintolan tiedot</h1>
-	<div>
 		<form th:object="${restaurant}" th:action="@{save}" action="#" method="post">
 		  	<label for="name">Nimi</label>
 			<input type="text" id="name" th:field="*{name}" />
-			<div style="clear: both; display: block; height: 10px;"></div>
+			<div style="clear: both; display: block; height: 20px;"></div>
 			
 		  	<label for="address">Osoite</label>
 			<input type="text" id="address" th:field="*{address}" />
-			<div style="clear: both; display: block; height: 10px;"></div>
+			<div style="clear: both; display: block; height: 20px;"></div>
 			
 		  	<label for="phone">Puhelinnumero</label>
 			<input type="text" th:field="*{phone}" />
-			<div style="clear: both; display: block; height: 10px;"></div>
+			<div style="clear: both; display: block; height: 20px;"></div>
 			
 			<label for = "cuisine">Keittiö</label>
 			<select id = "cuisine" th:field="*{cuisine}" class="form-control">
 				<option th:each = "cuisine: ${cuisines}" th:value="${cuisine.cuisineid}" th:text = "${cuisine.name}"></option>
 			</select>
-			<div style="clear: both; display: block; height: 10px;"></div>
+			<div style="clear: both; display: block; height: 20px;"></div>
 			
-			<input type="submit" class="btn btn-success" value="Tallenna"></input>
+			<input type="submit" class="btn btn-info" value="Tallenna"></input>
 		</form>
 	</div>
 </body>
