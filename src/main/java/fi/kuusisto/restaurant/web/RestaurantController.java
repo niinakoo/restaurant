@@ -3,11 +3,15 @@ package fi.kuusisto.restaurant.web;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -48,8 +52,18 @@ public class RestaurantController {
 		return "addRestaurant";
 	}
 	
+	@PostMapping(value = "/add")
+	public String restaurantAdded(@Valid Restaurant restaurant, BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) {
+			return "addRestaurant";
+		}
+
+		model.addAttribute("restaurant", restaurant);
+		return "result";
+	}
+	
 	//Tallentaa uuden ravintolan
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	@RequestMapping(value = "/save")
 	public String save(Restaurant restaurant) {
 		repository.save(restaurant);
 		return "redirect:restaurantlist";

@@ -11,9 +11,10 @@
 <body>
 	<div class="container">
 	<h1>Lisää ravintolan tiedot</h1>
-		<form th:object="${restaurant}" th:action="@{save}" action="#" method="post">
+		<form th:object="${restaurant}" th:action="@{add}" action="#" method="post">
 		  	<label for="name">Nimi</label>
 			<input type="text" id="name" th:field="*{name}" />
+			<td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Virheellinen arvo</td>
 			<div style="clear: both; display: block; height: 20px;"></div>
 			
 		  	<label for="address">Osoite</label>

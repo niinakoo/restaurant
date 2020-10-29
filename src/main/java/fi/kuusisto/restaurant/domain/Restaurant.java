@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -15,7 +16,9 @@ public class Restaurant {
 	@Id													// Uniikki id
 	@GeneratedValue(strategy=GenerationType.AUTO)		// Tietokanta luo automaattisesti id:n
 	private long id;
-	private String name, address, phone;
+	private String address, phone;
+	@Size(min=2, max=40)
+	private String name;
 	
 	@ManyToOne
 	@JsonIgnore
